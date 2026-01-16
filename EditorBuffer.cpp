@@ -1,78 +1,73 @@
-
-
 #include "EditorBuffer.h"
 
 #include <fstream>
 #include <iostream>
-#include <ranges>
+#include <ostream>
 #include <string>
-#include <vector>
 
 std::ifstream infile;
-std::vector<std::string> text;
-std::string filePath;
-int currentLine;
 
 EditorBuffer::EditorBuffer(const std::string& path) {
-  filePath = path;
-  infile.open(path,  std::ios::in);
+  this->path = path;
+  infile.open(this->path, std::ios::in);
   if (!infile.is_open())
   {
-    std::cerr << "Kunde inte öppna fil: " << path << std::endl;
+    std::cerr << "Kunde inte öppna fil: " << this->path << std::endl;
     return;
   }
 
   std::string s;
   while (std::getline(infile, s))
   {
-    text.emplace_back(s);
+    this->text.emplace_back(s);
   }
 }
 
 void EditorBuffer::selectLine(int line)
 {
-  currentLine = line - 1;
-  std::cout << currentLine + 1 << ": " << text[currentLine];
+  this->currentLine = line - 1;
+  std::cout << this->currentLine + 1 << ": " << this->text[this->currentLine] << std::endl;
+}
+
+void EditorBuffer::printAll()
+{
+  for (int i = 0; i < this->text.size(); i++)
+  {
+    std::cout<< i + 1 << ": " << this->text[i] << std::endl;
+  }
 }
 
 void EditorBuffer::print()
 {
-  for (int i = 0; i < text.size(); i++)
-  {
-    std::cout<< i + 1 << ": " << text[i] << std::endl;
-  }
-}
-
-void EditorBuffer::print(int line)
-{
-  std::cout<< line << ": " << text[line - 1] << std::endl;
+  std::cout<< this->currentLine + 1 << ": " << this->text[this->currentLine] << std::endl;
 }
 
 void EditorBuffer::editLine(const std::string line)
 {
-  text[currentLine] = line;
-  std::cout << "Skrev '" << text[currentLine] << "' till rad " << currentLine + 1 << std::endl;
+  this->text[this->currentLine] = line;
+  std::cout << "Skrev '" << this->text[this->currentLine] << "' till rad " << this->currentLine + 1 << std::endl;
 }
 
 void EditorBuffer::saveWritten()
 {
   infile.close();
   std::ofstream outfile;
-  outfile.open(filePath, std::ios::out | std::ios::trunc);
+  outfile.open(this->path, std::ios::out | std::ios::trunc);
 
   if (!outfile.is_open())
   {
-    std::cerr<< "Kunde inte öppna fil: " << filePath << std::endl;
+    std::cerr<< "Kunde inte öppna fil: " << this->path << std::endl;
     outfile.close();
     return;
   }
 
-  for (const std::string& line : text)
+  for (const std::string& line : this->text)
   {
     outfile << line << std::endl;
   }
 
   outfile.close();
+  std::cout << "Sparade filen " << this->path << std::endl;
 }
 
 EditorBuffer::~EditorBuffer()
@@ -80,3 +75,7 @@ EditorBuffer::~EditorBuffer()
   this->saveWritten();
 }
 
+int EditorBuffer::getCurrentLine()
+{
+  return this->currentLine;
+}

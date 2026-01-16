@@ -12,7 +12,7 @@ int main() {
   char opt = 'l';
   while (opt != 'a')
   {
-    std::cout<< "Vill du [a]vsluta, [v]älja rad, [l]äsa hela fileninnehållet, [s]kriva till en rad, s[p]ara innehållet?";
+    std::cout<< "Vill du [a]vsluta, [v]älja rad, [l]äsa hela fileninnehållet, [s]kriva till en rad, s[p]ara innehållet? ";
     std::cin >> opt;
     switch (opt){
 
@@ -29,11 +29,7 @@ int main() {
     }
     case 's':
       {
-        int lineNum;
-        std::cout<< "Vilken rad? ";
-        std::cin >> lineNum;
-        buffer.print(lineNum);
-        buffer.selectLine(lineNum);
+        buffer.print();
         std::string strLine;
         std::cout << "Skriv vad du vill ska stå på raden: ";
         std::cin.ignore();

@@ -1,6 +1,4 @@
-//
-// Created by hen3066 on 2025-10-22.
-//
+
 #pragma once
 #ifndef TEXTREDIGERARE_CPP_EDITORBUFFER_H
 #define TEXTREDIGERARE_CPP_EDITORBUFFER_H

@@ -1,6 +1,4 @@
-//
-// Created by hen3066 on 2025-10-22.
-//
+
 
 #include "EditorBuffer.h"
 

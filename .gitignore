@@ -2,7 +2,6 @@ CMakeCache.txt
 CMakeFiles/
 build.ninja
 cmake_install.cmake
-**/.*  
-**/.*/
+.*
 !/.gitignore
 textredigerare_cpp

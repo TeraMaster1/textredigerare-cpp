@@ -6,6 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-fsanitize=address -g)
 add_link_options(-fsanitize=address)
 
-add_executable(textredigerare_cpp main.cpp
-    EditorBuffer.cpp
-    EditorBuffer.h)
+add_executable(textredigerare_cpp src/main.cpp
+    src/EditorBuffer.cpp
+    src/EditorBuffer.h)

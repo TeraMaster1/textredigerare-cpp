@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 
+namespace Editor {
 
 class EditorBuffer {
 public:
@@ -23,6 +24,6 @@ private:
   std::vector<std::string> text;
   std::ifstream infile;
 };
-
+}
 
 #endif //TEXTREDIGERARE_CPP_EDITORBUFFER_H

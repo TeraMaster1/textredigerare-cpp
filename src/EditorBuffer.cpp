@@ -5,6 +5,8 @@
 #include <ostream>
 #include <string>
 
+namespace Editor {
+
 EditorBuffer::EditorBuffer(const std::string& path) {
   this->path = path;
   this->infile.open(this->path, std::ios::in);
@@ -76,4 +78,5 @@ EditorBuffer::~EditorBuffer()
 int EditorBuffer::getCurrentLine()
 {
   return this->currentLine;
+}
 }

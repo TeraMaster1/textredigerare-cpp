@@ -8,22 +8,23 @@
 
 namespace Editor {
 
-class EditorBuffer {
-public:
-  explicit EditorBuffer(const std::string& path);
-  void print();
-  void printAll();
-  void editLine(std::string line);
-  void saveWritten();
-  void selectLine(int line);
-  int getCurrentLine();
-  ~EditorBuffer();
-private:
-  int currentLine;
-  std::string path;
-  std::vector<std::string> text;
-  std::ifstream infile;
-};
-}
+  class EditorBuffer {
+    public:
+      explicit EditorBuffer(const std::string &path);
+      void print();
+      void printAll();
+      void editLine(std::string line);
+      void saveWritten();
+      void selectLine(int line);
+      int getCurrentLine();
+      ~EditorBuffer();
 
-#endif //TEXTREDIGERARE_CPP_EDITORBUFFER_H
+    private:
+      int currentLine;
+      std::string path;
+      std::vector<std::string> text;
+      std::ifstream infile;
+  };
+} // namespace Editor
+
+#endif // TEXTREDIGERARE_CPP_EDITORBUFFER_H

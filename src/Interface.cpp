@@ -3,14 +3,10 @@
 #include <ncurses.h>
 
 namespace Editor {
-  void init()
-  {
+  void init() {
     initscr();
     refresh();
     getch();
   }
-  void draw(EditorBuffer buffer)
-  {
-     
-  }
-}
+  void draw(EditorBuffer buffer) {}
+} // namespace Editor

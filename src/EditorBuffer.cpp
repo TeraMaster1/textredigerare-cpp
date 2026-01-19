@@ -7,76 +7,63 @@
 
 namespace Editor {
 
-EditorBuffer::EditorBuffer(const std::string& path) {
-  this->path = path;
-  this->infile.open(this->path, std::ios::in);
-  if (!this->infile.is_open())
-  {
-    std::cerr << "Kunde inte öppna fil: " << this->path << std::endl;
-    return;
+  EditorBuffer::EditorBuffer(const std::string &path) {
+    this->path = path;
+    this->infile.open(this->path, std::ios::in);
+    if (!this->infile.is_open()) {
+      std::cerr << "Kunde inte öppna fil: " << this->path << std::endl;
+      return;
+    }
+
+    std::string s;
+    while (std::getline(this->infile, s)) {
+      this->text.emplace_back(s);
+    }
   }
 
-  std::string s;
-  while (std::getline(this->infile, s))
-  {
-    this->text.emplace_back(s);
+  void EditorBuffer::selectLine(int line) {
+    this->currentLine = line - 1;
+    std::cout << this->currentLine + 1 << ": " << this->text[this->currentLine]
+              << std::endl;
   }
-}
 
-void EditorBuffer::selectLine(int line)
-{
-  this->currentLine = line - 1;
-  std::cout << this->currentLine + 1 << ": " << this->text[this->currentLine] << std::endl;
-}
-
-void EditorBuffer::printAll()
-{
-  for (int i = 0; i < this->text.size(); i++)
-  {
-    std::cout<< i + 1 << ": " << this->text[i] << std::endl;
+  void EditorBuffer::printAll() {
+    for (int i = 0; i < this->text.size(); i++) {
+      std::cout << i + 1 << ": " << this->text[i] << std::endl;
+    }
   }
-}
 
-void EditorBuffer::print()
-{
-  std::cout<< this->currentLine + 1 << ": " << this->text[this->currentLine] << std::endl;
-}
+  void EditorBuffer::print() {
+    std::cout << this->currentLine + 1 << ": " << this->text[this->currentLine]
+              << std::endl;
+  }
 
-void EditorBuffer::editLine(const std::string line)
-{
-  this->text[this->currentLine] = line;
-  std::cout << "Skrev '" << this->text[this->currentLine] << "' till rad " << this->currentLine + 1 << std::endl;
-}
+  void EditorBuffer::editLine(const std::string line) {
+    this->text[this->currentLine] = line;
+    std::cout << "Skrev '" << this->text[this->currentLine] << "' till rad "
+              << this->currentLine + 1 << std::endl;
+  }
 
-void EditorBuffer::saveWritten()
-{
-  this->infile.close();
-  std::ofstream outfile;
-  outfile.open(this->path, std::ios::out | std::ios::trunc);
+  void EditorBuffer::saveWritten() {
+    this->infile.close();
+    std::ofstream outfile;
+    outfile.open(this->path, std::ios::out | std::ios::trunc);
 
-  if (!outfile.is_open())
-  {
-    std::cerr<< "Kunde inte öppna fil: " << this->path << std::endl;
+    if (!outfile.is_open()) {
+      std::cerr << "Kunde inte öppna fil: " << this->path << std::endl;
+      outfile.close();
+      return;
+    }
+
+    for (const std::string &line : this->text) {
+      outfile << line << std::endl;
+    }
+
     outfile.close();
-    return;
+    std::cout << "Sparade filen " << this->path << std::endl;
   }
 
-  for (const std::string& line : this->text)
-  {
-    outfile << line << std::endl;
-  }
+  EditorBuffer::~EditorBuffer() { this->saveWritten(); }
 
-  outfile.close();
-  std::cout << "Sparade filen " << this->path << std::endl;
-}
-
-EditorBuffer::~EditorBuffer()
-{
-  this->saveWritten();
-}
-
-int EditorBuffer::getCurrentLine()
-{
-  return this->currentLine;
-}
-}
+  int EditorBuffer::getCurrentLine() { return this->currentLine; }
+} // namespace Editor

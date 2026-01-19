@@ -1,8 +1,5 @@
 #include <ncurses.h>
 
 namespace Editor {
-  enum Mode {
-    MOVE,
-    INPUT
-  };
+  enum Mode { MOVE, INPUT };
 }

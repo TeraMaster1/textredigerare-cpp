@@ -4,4 +4,5 @@ build.ninja
 cmake_install.cmake
 .*
 !/.gitignore
+!/.clang-format
 textredigerare_cpp

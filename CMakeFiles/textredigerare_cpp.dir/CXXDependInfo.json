@@ -1,0 +1,32 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "",
+	"cxx-modules" : {},
+	"database-info" : null,
+	"dir-cur-bld" : "/home/fjodor/devel/textredigerare-cpp",
+	"dir-cur-src" : "/home/fjodor/devel/textredigerare-cpp",
+	"dir-top-bld" : "/home/fjodor/devel/textredigerare-cpp",
+	"dir-top-src" : "/home/fjodor/devel/textredigerare-cpp",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/home/fjodor/devel/textredigerare-cpp/CMakeFiles/textredigerare_cpp.dir",
+	"sources" : 
+	{
+		"CMakeFiles/textredigerare_cpp.dir/src/EditorBuffer.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/fjodor/devel/textredigerare-cpp/src/EditorBuffer.cpp"
+		},
+		"CMakeFiles/textredigerare_cpp.dir/src/main.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/fjodor/devel/textredigerare-cpp/src/main.cpp"
+		}
+	}
+}

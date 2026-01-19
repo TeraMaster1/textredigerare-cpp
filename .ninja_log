@@ -1,0 +1,10 @@
+# ninja log v7
+0	102	1768845332758390336	CMakeFiles/textredigerare_cpp.dir/src/main.cpp.o.ddi	4c023d3e2e1b65b7
+1	253	1768845332759390338	CMakeFiles/textredigerare_cpp.dir/src/EditorBuffer.cpp.o.ddi	f50d8a3235aca69
+253	258	1768845333017010924	CMakeFiles/textredigerare_cpp.dir/CXX.dd	2f20c51c41e518e6
+253	258	1768845333017010924	CMakeFiles/textredigerare_cpp.dir/CXXModules.json	2f20c51c41e518e6
+253	258	1768845333017010924	CMakeFiles/textredigerare_cpp.dir/src/main.cpp.o.modmap	2f20c51c41e518e6
+253	258	1768845333017010924	CMakeFiles/textredigerare_cpp.dir/src/EditorBuffer.cpp.o.modmap	2f20c51c41e518e6
+258	977	1768845333017010924	CMakeFiles/textredigerare_cpp.dir/src/main.cpp.o	2253b0e9a6c56991
+258	1035	1768845333017655806	CMakeFiles/textredigerare_cpp.dir/src/EditorBuffer.cpp.o	a5b577c2493484e1
+1035	1071	1768845333793392535	textredigerare_cpp	33c9a17ffc5b2cc9

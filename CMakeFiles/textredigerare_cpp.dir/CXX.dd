@@ -1,0 +1,5 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles/textredigerare_cpp.dir/src/main.cpp.o: dyndep
+
+build CMakeFiles/textredigerare_cpp.dir/src/EditorBuffer.cpp.o: dyndep
+

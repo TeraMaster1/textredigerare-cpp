@@ -1,22 +1,25 @@
 #include "EditorBuffer.h"
 
 #include <fstream>
+#include <ios>
 #include <iostream>
 #include <ostream>
 #include <string>
+#include <vector>
 
 namespace Editor {
 
   EditorBuffer::EditorBuffer(const std::string &path) {
     this->path = path;
-    this->infile.open(this->path, std::ios::in);
-    if (!this->infile.is_open()) {
+    std::ifstream infile; 
+    infile.open(this->path, std::ios::in);
+    if (!infile.is_open()) {
       std::cerr << "Kunde inte öppna fil: " << this->path << std::endl;
       return;
     }
 
     std::string s;
-    while (std::getline(this->infile, s)) {
+    while (std::getline(infile, s)) {
       this->text.emplace_back(s);
     }
   }
@@ -45,7 +48,6 @@ namespace Editor {
   }
 
   void EditorBuffer::saveWritten() {
-    this->infile.close();
     std::ofstream outfile;
     outfile.open(this->path, std::ios::out | std::ios::trunc);
 
@@ -66,4 +68,8 @@ namespace Editor {
   EditorBuffer::~EditorBuffer() { this->saveWritten(); }
 
   int EditorBuffer::getCurrentLine() { return this->currentLine; }
+
+  std::vector<std::string> EditorBuffer::getBufferText() {
+    return this->text;
+  }
 } // namespace Editor

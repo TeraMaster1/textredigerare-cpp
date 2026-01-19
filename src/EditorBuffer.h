@@ -17,13 +17,13 @@ namespace Editor {
       void saveWritten();
       void selectLine(int line);
       int getCurrentLine();
+      std::vector<std::string> getBufferText();
       ~EditorBuffer();
 
     private:
       int currentLine;
       std::string path;
       std::vector<std::string> text;
-      std::ifstream infile;
   };
 } // namespace Editor
 

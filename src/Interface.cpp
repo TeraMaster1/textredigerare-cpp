@@ -6,7 +6,9 @@ namespace Editor {
   void init() {
     initscr();
     refresh();
+  }
+  void draw(EditorBuffer buffer) {
+    addstr(buffer.getBufferText()[0].c_str());
     getch();
   }
-  void draw(EditorBuffer buffer) {}
 } // namespace Editor

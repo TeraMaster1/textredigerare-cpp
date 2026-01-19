@@ -1,9 +1,11 @@
 #include <iostream>
+#include <filesystem>
 
 #include "EditorBuffer.h"
 #include "Interface.h"
 
 int main(int argc, char **argv) {
+  std::cout << "Katalog: " << std::filesystem::current_path() << "\n";
   std::cout << "Programmet startade" << std::endl;
   std::string path;
 
@@ -15,6 +17,8 @@ int main(int argc, char **argv) {
   }
 
   Editor::EditorBuffer buffer = Editor::EditorBuffer(path);
+  Editor::init();
+  Editor::draw(buffer);
   buffer.print();
   char opt = 'l';
   while (opt != 'a') {
@@ -25,7 +29,7 @@ int main(int argc, char **argv) {
 
       case 'l':
         {
-          buffer.print();
+          buffer.printAll();
           break;
         }
       case 'v':
@@ -38,7 +42,7 @@ int main(int argc, char **argv) {
         }
       case 's':
         {
-          buffer.print();
+          buffer.printAll();
           std::string strLine;
           std::cout << "Skriv vad du vill ska stå på raden: ";
           std::cin.ignore();

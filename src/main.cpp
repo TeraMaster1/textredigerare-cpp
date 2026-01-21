@@ -18,11 +18,9 @@ int main(int argc, char **argv) {
 
   Editor::EditorBuffer buffer = Editor::EditorBuffer(path);
   Editor::Interface interface = Editor::init_draw(&buffer);
-  Editor::draw(buffer);
-  //buffer.printAll();
+  Editor::draw(&interface);
   char opt = 'l';
   while (opt != 'a') {
-    std::cout << ;
     std::cin >> opt;
     switch (opt) {
 

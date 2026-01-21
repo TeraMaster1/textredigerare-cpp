@@ -9,3 +9,4 @@ textredigerare_cpp
 _deps/
 CPackConfig.cmake
 CPackSourceConfig.cmake
+compile_commands.json

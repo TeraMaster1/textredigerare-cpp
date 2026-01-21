@@ -1,9 +1,18 @@
+#pragma once
 #include "EditorBuffer.h"
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/screen/screen.hpp>
 
 namespace Editor {
   enum Mode { MOVE, INPUT };
-  void init_draw();
-  void draw(EditorBuffer buffer);
+
+  typedef struct {
+    EditorBuffer *buffer;
+    ftxui::Screen screen;
+    std::vector<ftxui::Element> elements;
+    int cursorPosX;
+  } Interface ;
+
+  Interface init_draw(EditorBuffer *buffer);
+  void draw(Interface *interface);
 } // namespace Editor

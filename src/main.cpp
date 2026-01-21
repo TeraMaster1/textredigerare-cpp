@@ -17,13 +17,12 @@ int main(int argc, char **argv) {
   }
 
   Editor::EditorBuffer buffer = Editor::EditorBuffer(path);
-  Editor::init_draw();
-  //Editor::draw(buffer);
-  buffer.print();
+  Editor::Interface interface = Editor::init_draw(&buffer);
+  Editor::draw(buffer);
+  //buffer.printAll();
   char opt = 'l';
   while (opt != 'a') {
-    std::cout << "Vill du [a]vsluta, [v]älja rad, [l]äsa hela fileninnehållet, "
-                 "[s]kriva till en rad, s[p]ara innehållet? ";
+    std::cout << ;
     std::cin >> opt;
     switch (opt) {
 

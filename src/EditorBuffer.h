@@ -2,7 +2,6 @@
 #pragma once
 #ifndef TEXTREDIGERARE_CPP_EDITORBUFFER_H
 #define TEXTREDIGERARE_CPP_EDITORBUFFER_H
-#include <fstream>
 #include <string>
 #include <vector>
 
@@ -18,6 +17,7 @@ namespace Editor {
       void selectLine(int line);
       int getCurrentLine();
       std::vector<std::string> getBufferText();
+      void addRows(int index, int rows);
       ~EditorBuffer();
 
     private:

@@ -1,27 +1,27 @@
 #include "Interface.h"
 
+#include <ranges>
+
+#include "ftxui/component/component.hpp"
+#include "ftxui/component/screen_interactive.hpp"
+
 
 namespace Editor {
-  void init_draw() {
-    // Create a simple document with three text elements.
-    ftxui::Element document = ftxui::hbox({
-      ftxui::text("left")   | ftxui::border,
-      ftxui::text("middle") | ftxui::border | ftxui::flex,
-      ftxui::text("right")  | ftxui::border,
-    });
-
-    // Create a screen with full width and height fitting the document.
-    auto screen = ftxui::Screen::Create(
-      ftxui::Dimension::Full(),       // Width
-      ftxui::Dimension::Fit(document) // Height
-    );
-
-    // Render the document onto the screen.
-    ftxui::Render(screen, document);
-
-    // Print the screen to the console.
-    screen.Print();
+  Interface init_draw(EditorBuffer *buffer) {
+    ftxui::Screen screen = ftxui::Screen::Create(ftxui::Dimension::Full(),
+                                                 ftxui::Dimension::Fixed(10));
+    std::vector<ftxui::Element> elements = std::vector<ftxui::Element>();
+    ftxui::Element bottom_bar = ftxui::hbox(
+    {ftxui::text("Vill du [a]vsluta, [v]älja rad, [l]äsa hela fileninnehållet, "
+               "[s]kriva till en rad, s[p]ara innehållet?")});
+    elements.push_back(bottom_bar);
+    Interface interface = {buffer, screen, elements, 0};
+    return interface;
   }
-  void draw(EditorBuffer buffer) {
+
+  void draw(Interface *interface) {
+    for (ftxui::Element element : interface->elements) {
+      ftxui::Render(interface->screen, element);
+    }
   }
 } // namespace Editor

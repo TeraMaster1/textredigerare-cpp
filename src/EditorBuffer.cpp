@@ -10,8 +10,9 @@
 namespace Editor {
 
   EditorBuffer::EditorBuffer(const std::string &path) {
+    this->currentLine = 0;
     this->path = path;
-    std::ifstream infile; 
+    std::ifstream infile;
     infile.open(this->path, std::ios::in);
     if (!infile.is_open()) {
       std::cerr << "Kunde inte öppna fil: " << this->path << std::endl;
@@ -27,7 +28,7 @@ namespace Editor {
   void EditorBuffer::selectLine(int line) {
     this->currentLine = line - 1;
     std::cout << this->currentLine + 1 << ": " << this->text[this->currentLine]
-              << std::endl;
+      << std::endl;
   }
 
   void EditorBuffer::printAll() {
@@ -37,14 +38,24 @@ namespace Editor {
   }
 
   void EditorBuffer::print() {
+    if (this->text.empty()) {
+      std::cout << "Ingen text har laddats in." << std::endl;
+      return;
+    }
+
+    if (this->currentLine < 0 || this->currentLine > text.size()) {
+      std::cout << "Raden finns inte med." << std::endl;
+      return;
+    }
+
     std::cout << this->currentLine + 1 << ": " << this->text[this->currentLine]
-              << std::endl;
+      << std::endl;
   }
 
   void EditorBuffer::editLine(const std::string line) {
     this->text[this->currentLine] = line;
     std::cout << "Skrev '" << this->text[this->currentLine] << "' till rad "
-              << this->currentLine + 1 << std::endl;
+      << this->currentLine + 1 << std::endl;
   }
 
   void EditorBuffer::saveWritten() {
@@ -72,4 +83,9 @@ namespace Editor {
   std::vector<std::string> EditorBuffer::getBufferText() {
     return this->text;
   }
+
+  void EditorBuffer::addRows(int index, int rows) {
+    this->text.insert(this->text.begin() + index, rows, "");
+  }
+
 } // namespace Editor

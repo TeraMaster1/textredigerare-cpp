@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
   }
 
   Editor::EditorBuffer buffer = Editor::EditorBuffer(path);
-  //Editor::init();
+  Editor::init_draw();
   //Editor::draw(buffer);
   buffer.print();
   char opt = 'l';

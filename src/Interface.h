@@ -14,5 +14,6 @@ namespace Editor {
   } Interface ;
 
   Interface init_draw(EditorBuffer *buffer);
+  void create_elements(Interface *interface);
   void draw(Interface *interface);
 } // namespace Editor

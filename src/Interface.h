@@ -1,18 +1,17 @@
 #pragma once
 #include "EditorBuffer.h"
 #include <ftxui/dom/elements.hpp>
-#include <ftxui/screen/screen.hpp>
+#include "ftxui/component/screen_interactive.hpp"
 
 namespace Editor {
   enum Mode { MOVE, INPUT };
 
   typedef struct {
     EditorBuffer *buffer;
-    ftxui::Screen screen;
+    ftxui::ScreenInteractive *screen;
     ftxui::Element body;
     ftxui::Element bottomBar;
     int cursorPosX;
-    ftxui::Dimensions dimensions;
   } Interface ;
 
   Interface init_draw(EditorBuffer *buffer);

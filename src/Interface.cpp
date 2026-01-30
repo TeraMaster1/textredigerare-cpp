@@ -3,24 +3,27 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/screen/screen.hpp>
 
+#include "ftxui/component/screen_interactive.hpp"
+
 
 namespace Editor {
   Interface init_draw(EditorBuffer *buffer) {
-    ftxui::Screen screen = ftxui::Screen::Create(ftxui::Dimension::Full(),
-                                                 ftxui::Dimension::Full());
+    static ftxui::ScreenInteractive screen = ftxui::ScreenInteractive::TerminalOutput();
     ftxui::Element body = ftxui::Element();
     ftxui::Element bottom_bar = ftxui::Element();
-    ftxui::Dimensions dimensions = ftxui::Terminal::Size();
-    Interface interface = {buffer, screen, body, bottom_bar, 0, dimensions};
+    Interface interface = {buffer,
+      &screen,
+      body,
+      bottom_bar,
+      0};
     return interface;
   }
 
   void create_elements(Interface *interface) {
     std::vector<std::string> lines = interface->buffer->getBufferText();
     int currentLine = interface->buffer->getCurrentLine();
-    interface->dimensions = ftxui::Terminal::Size();
-    int upper = currentLine - (interface->dimensions.dimy / 2);
-    int lower = currentLine + (interface->dimensions.dimy / 2);
+    int upper = currentLine - (interface->screen->dimy() / 2);
+    int lower = currentLine + (interface->screen->dimy() / 2);
 
     if (lines.empty()) {
       return;
@@ -45,10 +48,10 @@ namespace Editor {
   }
 
   void draw(Interface *interface) {
-    interface->screen.Clear();
-    ftxui::Render(interface->screen, interface->body);
-    ftxui::Render(interface->screen, interface->bottomBar);
+    interface->screen->Clear();
+    ftxui::Render(*interface->screen, interface->body);
+    ftxui::Render(*interface->screen, interface->bottomBar);
 
-    interface->screen.Print();
+    interface->screen->Print();
   }
 } // namespace Editor

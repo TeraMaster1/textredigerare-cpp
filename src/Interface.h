@@ -9,8 +9,10 @@ namespace Editor {
   typedef struct {
     EditorBuffer *buffer;
     ftxui::Screen screen;
-    std::vector<ftxui::Element> elements;
+    ftxui::Element body;
+    ftxui::Element bottomBar;
     int cursorPosX;
+    ftxui::Dimensions dimensions;
   } Interface ;
 
   Interface init_draw(EditorBuffer *buffer);

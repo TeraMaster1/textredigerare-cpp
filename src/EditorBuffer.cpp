@@ -78,7 +78,7 @@ namespace Editor {
 
   EditorBuffer::~EditorBuffer() { this->saveWritten(); }
 
-  int EditorBuffer::getCurrentLine() { return this->currentLine; }
+  int EditorBuffer::getCurrentLine() const { return this->currentLine; }
 
   std::vector<std::string> EditorBuffer::getBufferText() {
     return this->text;

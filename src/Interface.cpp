@@ -8,31 +8,46 @@ namespace Editor {
   Interface init_draw(EditorBuffer *buffer) {
     ftxui::Screen screen = ftxui::Screen::Create(ftxui::Dimension::Full(),
                                                  ftxui::Dimension::Full());
-    std::vector<ftxui::Element> elements = std::vector<ftxui::Element>();
-    Interface interface = {buffer, screen, elements, 0};
+    ftxui::Element body = ftxui::Element();
+    ftxui::Element bottom_bar = ftxui::Element();
+    ftxui::Dimensions dimensions = ftxui::Terminal::Size();
+    Interface interface = {buffer, screen, body, bottom_bar, 0, dimensions};
     return interface;
   }
 
   void create_elements(Interface *interface) {
     std::vector<std::string> lines = interface->buffer->getBufferText();
-    std::string text;
-    for (const std::string& line : lines) {
-      text.append(line + "\n");
+    int currentLine = interface->buffer->getCurrentLine();
+    interface->dimensions = ftxui::Terminal::Size();
+    int upper = currentLine - (interface->dimensions.dimy / 2);
+    int lower = currentLine + (interface->dimensions.dimy / 2);
+
+    if (lines.empty()) {
+      return;
     }
-    ftxui::Element bottom_bar = ftxui::vbox(
-    {ftxui::hbox({ftxui::text(text)}),
+
+    int start = std::max(0, upper);
+    int end = std::min(static_cast<int>(lines.size()) - 1, lower);
+
+    std::vector<ftxui::Element> content;
+    for (int i = start; i <= end; ++i) {
+      content.push_back(ftxui::text(std::to_string(i) + " " + lines[i]));
+    }
+
+    interface->body = ftxui::vbox(content) | ftxui::flex;
+
+    interface->bottomBar = ftxui::vbox(
+    {ftxui::filler(),
      ftxui::hbox({ftxui::filler(), ftxui::text(
                     "Vill du [a]vsluta, [v]älja rad, [l]äsa hela fileninnehållet, "
                     "[s]kriva till en rad, s[p]ara innehållet?"),
                   ftxui::filler()})});
-    interface->elements.push_back(bottom_bar);
   }
 
   void draw(Interface *interface) {
     interface->screen.Clear();
-    for (const ftxui::Element &element : interface->elements) {
-      ftxui::Render(interface->screen, element);
-    }
+    ftxui::Render(interface->screen, interface->body);
+    ftxui::Render(interface->screen, interface->bottomBar);
 
     interface->screen.Print();
   }

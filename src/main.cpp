@@ -18,18 +18,12 @@ int main(int argc, char **argv) {
 
   Editor::EditorBuffer buffer = Editor::EditorBuffer(path);
   Editor::Interface interface = Editor::init_draw(&buffer);
-  Editor::create_elements(&interface);
-  Editor::draw(&interface);
   char opt = 'l';
   while (opt != 'a') {
+    Editor::create_elements(&interface);
+    Editor::draw(&interface);
     std::cin >> opt;
     switch (opt) {
-
-      case 'l':
-        {
-          buffer.printAll();
-          break;
-        }
       case 'v':
         {
           std::cout << "Välj rad: ";

@@ -15,7 +15,7 @@ namespace Editor {
       void editLine(std::string line);
       void saveWritten();
       void selectLine(int line);
-      int getCurrentLine();
+      int getCurrentLine() const;
       std::vector<std::string> getBufferText();
       void addRows(int index, int rows);
       ~EditorBuffer();
